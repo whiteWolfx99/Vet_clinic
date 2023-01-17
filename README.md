@@ -66,7 +66,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 [Vet clinic database] <a name="about-project"></a>
 
-**[Vet clinic database]** In this project, you will use a relational database to create the initial data structure for a vet clinic. You will create a table to store animals' information, insert some data into it, and query it.
+**[Vet clinic database]** In this project, you will use transactions to update and delete records. You will also use your knowledge of aggregate functions and GROUP BY to answer analytical questions.
 
 ## 🛠 Built With <a name="built-with"></a>
 
