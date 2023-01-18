@@ -66,7 +66,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 [Vet clinic database] <a name="about-project"></a>
 
-**[Vet clinic database]** In this project, you will use transactions to update and delete records. You will also use your knowledge of aggregate functions and GROUP BY to answer analytical questions.
+**[Vet clinic database]** In this project you will add some new tables and add foreign key columns to your existing `animals` table to model **one-to-many** relationships. Afterward, you will use `JOIN` to query the data.
 
 ## 🛠 Built With <a name="built-with"></a>
 
