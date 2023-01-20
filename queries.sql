@@ -101,3 +101,82 @@ LIMIT 1;
 
 
 
+
+WITH recent_visits AS (
+    SELECT animal_id
+    FROM visits
+    WHERE vet_id = (SELECT id FROM vets WHERE name = 'William Tatcher')
+    ORDER BY date_of_visit DESC
+    LIMIT 1
+)
+SELECT name FROM animals
+JOIN recent_visits ON animals.id = recent_visits.animal_id;
+
+
+
+SELECT COUNT(animal_id) FROM visits
+WHERE vet_id = (SELECT id FROM vets WHERE name = 'Stephanie Mendez')
+GROUP BY animal_id;
+
+
+SELECT v.name, s.name FROM specializations sp
+JOIN vets v ON sp.vet_id = v.id
+JOIN species s ON sp.species_id = s.id
+
+
+
+WITH animal_visits AS (
+    SELECT animal_id
+    FROM visits
+    WHERE vet_id = (SELECT id FROM vets WHERE name = 'Stephanie Mendez')
+    AND date_of_visit BETWEEN '2020-04-01' AND '2020-08-30'
+)
+SELECT name FROM animals
+JOIN animal_visits ON animals.id = animal_visits.animal_id;
+
+
+SELECT name, COUNT(animal_id)
+FROM animals JOIN visits ON visits.animal_id = animals.id
+GROUP BY name
+ORDER BY COUNT(animal_id) DESC, name
+LIMIT 1
+
+
+SELECT a.name FROM visits v1
+JOIN visits v2 ON v1.animal_id = v2.animal_id
+JOIN animals a ON v1.animal_id = a.id
+JOIN vets ve ON v1.vet_id = ve.id
+WHERE ve.name = 'Maisy Smith' AND v1.date_of_visit = 
+(SELECT MIN(date_of_visit) FROM visits v WHERE v.vet_id = v1.vet_id)
+
+
+WITH latest_visit AS (
+    SELECT a.name as animal_name, v.name as vet_name, date_of_visit
+    FROM visits
+    JOIN animals a ON a.id = visits.animal_id
+    JOIN vets v ON v.id = visits.vet_id
+    ORDER BY date_of_visit DESC
+    LIMIT 1
+)
+SELECT animal_name, vet_name, date_of_visit FROM latest_visit;
+
+
+SELECT COUNT(*) FROM visits
+WHERE NOT EXISTS (SELECT 1 FROM specializations
+WHERE species_id = (SELECT species_id FROM animals
+WHERE id = visits.animal_id)
+AND specializations.vet_id = visits.vet_id);
+
+WITH animal_species AS (
+    SELECT species_id, COUNT(species_id) as count
+    FROM visits
+    JOIN animals ON animals.id = visits.animal_id
+    WHERE vet_id = (SELECT id FROM vets WHERE name = 'Maisy Smith')
+    GROUP BY species_id
+    ORDER BY count DESC
+    LIMIT 1
+)
+SELECT name FROM species
+JOIN animal_species ON species.id = animal_species.species_id;
+
+

@@ -66,7 +66,7 @@ After you're finished please remove all the comments and instructions!
 
 # 📖 [Vet clinic database] <a name="about-project"></a>
 
-**[Vet clinic database]** In this project you will add some new tables and add foreign key columns to your existing `animals` table to model **one-to-many** relationships. Afterward, you will use `JOIN` to query the data.
+**[Vet clinic database]** In this project, you will add some **many-to-many** relationships and write more complex queries to use them to answer questions.
 
 ## 🛠 Built With <a name="built-with"></a>
 
